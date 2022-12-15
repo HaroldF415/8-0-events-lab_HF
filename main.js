@@ -43,3 +43,14 @@ cellPicked.forEach( cell => {
   });
 
 });
+
+
+const resetBtn = document.querySelector(".reset");
+
+resetBtn.addEventListener("click", () => {
+
+  const colorPaletteCells = document.querySelectorAll(".cell");
+
+  colorPaletteCells.forEach( cell => cell.style.background = "white");
+  
+});
