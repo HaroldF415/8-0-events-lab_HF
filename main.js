@@ -1,5 +1,6 @@
 // Do not change the code below.
 const main = document.querySelector("main");
+
 for (let i = 0; i < 100; i++) {
   const div = document.createElement("div");
   div.classList.add("cell");
@@ -9,48 +10,52 @@ for (let i = 0; i < 100; i++) {
 // You may write your code here!
 
 // grab all the divs of the 'color' class
-const colorPalleteDivPicked = document.querySelectorAll(".color");
 
-// add eventListener if they are 'clicked' for each one of those divs of the 'color' class
-colorPalleteDivPicked.forEach( colorDiv => { 
+const currentColorDiv = document.getElementById("current-color");
 
+const colorPallete = document.querySelectorAll(".color");
+
+colorPallete.forEach( colorDiv => { 
   colorDiv.addEventListener('click', handleClick = () => { 
-
-    // access the 'background' property of the div clicked. This will get the 'color'
-    const color = colorDiv.style.background;
-
-    // access the '#current-color' div.
-    const currColor = document.getElementById("current-color");
-
-    // set the 'background' color of the 'current-color' background to that of the 'background' color of the clicked '.color' div
-    currColor.style.background = color;
-
+    currentColorDiv.style.background = colorDiv.style.background;
   }); 
-
 });
 
-// get all the divs created by the forLoop above.
-const cellPicked = document.querySelectorAll("#canvas .cell");
 
-// add a 'clicked' eventListener forEach of the divs clicked within the canvas.
-cellPicked.forEach( cell => {
+const cellsInCanvas = document.querySelectorAll(".cell");
 
+cellsInCanvas.forEach( cell => {
   cell.addEventListener('click', handleClick = () => {
-
-    // access the 'background' property of the cell
-    cell.style.background = document.getElementById("current-color").style.background;
-
+    cell.style.background = currentColorDiv.style.background;
   });
-
 });
-
 
 const resetBtn = document.querySelector(".reset");
 
-resetBtn.addEventListener("click", () => {
+resetBtn.addEventListener("click", handleClick = () => {
+  cellsInCanvas.forEach( cell => cell.style.background = "white");
+  currentColorDiv.style.background = "white";
+});
 
-  const colorPaletteCells = document.querySelectorAll(".cell");
+const fillInBtn = document.querySelector(".fill-in");
 
-  colorPaletteCells.forEach( cell => cell.style.background = "white");
-  
+fillInBtn.addEventListener("click", handleClick = () => {
+  cellsInCanvas.forEach( cell => cell.style.background = currentColorDiv.style.background );
+});
+
+const increaseCellCount = document.querySelector(".increment-cells");
+
+increaseCellCount.addEventListener( "click", handleClick = () => {
+
+  const div = document.createElement("div");
+
+  div.classList.add("cell");
+  main.append(div);
+
+  if( document.querySelectorAll(".cell").length > 100 ){
+    document.getElementById("canvas").style.height = "549px";
+  }else if(document.querySelectorAll(".cell").length > 110){
+    document.getElementById("canvas").style.height = "600px";
+  }
+
 });
